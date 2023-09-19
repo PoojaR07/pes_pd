@@ -572,7 +572,59 @@ Interconnect Delays: They account for the delays introduced by the wires and rou
 
 Output Loads: The output load conditions specify the capacitive load that the gate must drive, which affects the output delay.
 
+</details>
+
+<details>
+<summary>DAY 5 : Final steps for RTL2GDSII</summary>
+
+## Power Distribution Network and Routing
+
+PDN (Power Delivery Network) routing is a crucial aspect of integrated circuit design. It involves the creation of a network of traces and components to ensure that power is distributed effectively and reliably to all parts of the electronic device. 
+
+Global and detailed routing are two essential steps in the design and manufacturing of integrated circuits. 
+After generating our clock tree network  we  generate the power distribution network gen_pdn using  OpenLANE:
+
+The PDN  will create:
+
+- Power ring global for the entire core
+A global power ring is a continuous metal ring that surrounds the entire core of the IC.It's used to distribute power (VDD) uniformly to the core logic and various functional blocks.The power ring ensures that all regions of the core receive power without significant voltage drops.
+
+- Power halo local to any preplaced cells
+A power halo is a localized power distribution network around specific preplaced cells or macroblocks on the chip.Preplaced cells are often fixed in their positions, and a power halo provides them with the necessary power connections.
+
+- Power straps to bring power into the center of the chip
+Power straps are metal traces or structures used to bring power from the periphery of the chip towards the central regions.They are essential for delivering power to the core logic and other critical areas, reducing the distance power must travel.Power straps help maintain uniform power distribution across the chip.
+
+- Power rails for the standard cells
+Power rails are metal lines that run vertically or horizontally across the chip, supplying power to standard cells .These power rails ensure that each standard cell has access to the power it needs for proper operation.
+
+```gen_pdn```
+
+![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/f5bb5b94-acfe-438e-a4d8-0d0287641042)
 
 
+![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/1b6bb90d-cdf3-466c-9ab1-e8e68e43a8c3)
 
+
+to run the rounting we type ```run_routing```
+
+## SPEF Extraction
+
+SPEF stands for Standard Parasitic Exchange Format, and it is a standard file format used in the semiconductor industry to represent parasitic information for integrated circuits. Parasitic elements, such as resistance and capacitance, can significantly affect the performance of a circuit, so accurate modeling and extraction of these parasitics are crucial for designing and optimizing electronic devices.After routing has been completed interconnect parasitics can be extracted into a SPEF file. The SPEF extractor is nota part of OpenLANE as of now.
+
+Commands is 
+```
+cd Desktop/work/tools/SPEF_Extractor
+```
+
+then we type 
+```
+python3 /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/18-09_06-26/tmp/merged.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/18-09_06-26/results/routing/picorv32a.def
+```
+
+The SPEF exracted file is created. 
+Path to the created files is 
+```
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/18-09_06-26/results/routing/
+```
 </details>
