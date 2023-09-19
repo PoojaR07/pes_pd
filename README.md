@@ -597,10 +597,9 @@ Power rails are metal lines that run vertically or horizontally across the chip,
 
 ```gen_pdn```
 
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/f5bb5b94-acfe-438e-a4d8-0d0287641042)
+![Screenshot 2023-09-19 115709](https://github.com/PoojaR07/pes_pd/assets/135737910/f4483964-9f60-4dd9-9b05-f37ac7e13415)
 
-
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/1b6bb90d-cdf3-466c-9ab1-e8e68e43a8c3)
+![Screenshot 2023-09-19 115747](https://github.com/PoojaR07/pes_pd/assets/135737910/440435c1-c7da-4aeb-b44d-86a4ae34db96)
 
 
 to run the rounting we type ```run_routing```
