@@ -430,7 +430,7 @@ magic -d XR
 </details>
 
 <details>
-<summary>DAY 4 : Pre-Layout timing analysis and importance of good clock tree</summary
+<summary>DAY 4 : Pre-Layout timing analysis and importance of good clock tree</summary>
 
 ## Extraction of LEF 
 
