@@ -243,7 +243,8 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ## Labs for CMOS inverter ngspice simulations
 **IO Placer Revision**
 
-![image](https://github.com/AniruddhaN2203/pes_pd/assets/142299140/fabe5ca4-7dde-43f9-a8e4-260ed11ed820)
+![Screenshot 2023-09-19 114203](https://github.com/PoojaR07/pes_pd/assets/135737910/eebb382b-d84e-489f-a70a-1efb36e1be19)
+
 - The following command can be typed to change the I/O pins placemnt configuration.
 
 ## Inception of Layout and CMOS Fabrication Process
@@ -349,6 +350,7 @@ plot y vs time a
 - Propogation Delay/Cell Rise Delay -> 2.21379e-09 - 2.15e-09 = 0.03604e-09 s.
 
 **Introduction to Magic tool options and DRC rules**
+
 - Magic is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl. Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies. The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology. However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity. Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow.
 
 - Drc section The design rules used by Magic's design rule checker come entirely from the technology file. We'll look first at two simple kinds of rules, width and and spacing. Most of the rules in the drc section are one or the other of these kinds of rules.
@@ -356,6 +358,7 @@ plot y vs time a
 - SKY130 pdk SKY130 is a mature 180nm-130nm hybrid technology developed by Cypress Semiconductor that has been used for many production parts. SKY130 is now available as a foundry technology through SkyWater Technology Foundry.
 
 **Sky130 PDKS and Steps to Download Magic Tool**
+
 ![Screenshot from 2023-09-18 01-01-42](https://github.com/PoojaR07/pes_pd/assets/135737910/13ec6bbd-8e14-421d-88e2-7d0ea2413361)
 
 ![Screenshot from 2023-09-18 01-04-53](https://github.com/PoojaR07/pes_pd/assets/135737910/7404e257-2dad-4563-b7c1-b2ef5f703f72)
@@ -373,6 +376,7 @@ magic -d XR
 - To add contact cuts to metal3, first select an area using left and right click. Then hovering over the m3contact we click middle mouse button.
 
 **Fixing DRC Errors**
+
 - There is a DRC error in the poly.mag file in 'poly.9'.
 - Open the sky130A.tech file in the editor and make the following changes
 
@@ -387,48 +391,41 @@ magic -d XR
 - We can see the error is fixed
 ![Screenshot from 2023-09-18 15-09-05](https://github.com/PoojaR07/pes_pd/assets/135737910/33f963a3-e1d5-49e3-a613-94f3784b5240)
 
-**DRC error as geometrical construct**
+### Lab challenge exercise to describe DRC error as geometrical construct:
 
-Open the nwell.mag file in magic. Seletch the nwell.6 and type the commands
-```
-cif ostyle drc
-cif see dnwell_shrink
-cif see dnwell_missing
-```
+* Open the nwell.mag file.
+  
+![Screenshot 2023-09-19 114318](https://github.com/PoojaR07/pes_pd/assets/135737910/e0954bfc-3fff-45f8-922f-6c469a5736df)
 
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/5df2c37d-8812-4b99-9354-75df1b87f133)
+* Type the following commands:
+  + `cif ostyle drc`
+  + `cif see dnwell_shrink`
+  + `cif see nwell_missing`
+  
+![Screenshot 2023-09-19 114410](https://github.com/PoojaR07/pes_pd/assets/135737910/2ffd3c0a-2c28-4159-ac4c-a0a064f78b08)
 
+### Lab challenge to find missing or incorrect rules and fix them:
 
-Output 
+![Screenshot 2023-09-19 114445](https://github.com/PoojaR07/pes_pd/assets/135737910/9dda1863-c729-41c5-89a0-88d1115aa49a)
 
+* Make the following changes:
+  
+![Screenshot 2023-09-19 114534](https://github.com/PoojaR07/pes_pd/assets/135737910/cf385c56-5141-42f3-8ba1-afaa2a255f55)
 
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/a53fd631-d968-49ba-a1c2-3a839c7b2111)
+* Run the below commands:
 
+![Screenshot 2023-09-19 114623](https://github.com/PoojaR07/pes_pd/assets/135737910/136ea4c2-5bea-42b1-ad28-d0a0b61066e1)
 
-**to find missing or incorrect rules and fix them**
+* We observe that the error is still seen.
+  
+![Screenshot 2023-09-19 114653](https://github.com/PoojaR07/pes_pd/assets/135737910/76795c39-8059-4a6c-838c-ec22c95868e6)
 
-
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/3e68f2b7-5a31-4d46-b207-a65629b9c197)
-
-
-ERROR
-
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/5b0b494d-4797-4da7-8340-9355e7f0a0d5)
-
-To fix make the changes 
-
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/0325097c-4ff8-4461-8063-34d274c1cf48)
-
-
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/8cd1215a-bf4f-4fa6-910b-eaad60d19c20)
-
-
-Now load the sky130A.tech file and type the command ```drc check```  for both normal and drc fast 
-
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/a843d9f6-ead2-45fc-81df-22d46b651bc4)
-
-
-![image](https://github.com/Anirudh-Ravi123/pes_pd/assets/142154804/2cf31443-e887-4c36-9237-8ba889cab2fd)
+* To correct this error:
+  + Select the nwell.4
+  + Make a copy of it.
+  + Now select a small area on the nwell.4 and add an 'nsubstratecontact'.
+  
+![Screenshot 2023-09-19 114721](https://github.com/PoojaR07/pes_pd/assets/135737910/dba3159c-aecc-44f3-a827-3eb9902993f0)
 
 </details>
 
