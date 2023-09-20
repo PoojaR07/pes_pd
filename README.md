@@ -569,6 +569,49 @@ Interconnect Delays: They account for the delays introduced by the wires and rou
 
 Output Loads: The output load conditions specify the capacitive load that the gate must drive, which affects the output delay.
 
+
+## Clock Tree Synthesis
+
+- After all the above steps of fixing slack violations, as we have ```run_synthesis``` in openlane, it would have generated a mapped.v file in synthesis results but we have fixed all the violations using ```pre_sta.conf```. Therefore we write this netlist using ```write_verilog``` and replace the openlane generated mapped file ie., ```picorv32a.synthesis.v```
+
+- now in the openlane flow, continue with ```run_flooorplan``` ```run_placement``` ```run_cts```
+
+- To ensure that the cts step has added buffers and modified the netlist
+## Post CTS- STA Analysis
+
+OpenLANE has the OpenROAD application integrated into its flow. The OpenROAD application has OpenSTA integrated into its flow. Therefore, we can perform STA analysis from within OpenLANE by invoking OpenROAD.
+
+In OpenROAD the timing analysis is done by creating a .db database file. This database file is created from the post-cts LEF and DEF files. To generate the .db files within OpenROAD:
+- Invoke OpenRoad
+- Read lef file from tmp folder of runs
+- Read def file from results of cts
+- write db file
+- Read the generated db file
+- Read the cts generated verilog file
+- read min and max liberty file
+- set the clocks
+- generate the reports
+
+![image](https://github.com/yagnavivek/PES_OpenLane_PD/assets/93475824/74edcca7-9519-4269-a2b9-2fafdeef4e66)
+![image](https://github.com/yagnavivek/PES_OpenLane_PD/assets/93475824/02cf90b0-d02b-411d-847b-be6159e74502)
+![image](https://github.com/yagnavivek/PES_OpenLane_PD/assets/93475824/a5c62171-3c46-482d-8ad5-d7700774d1ec)
+
+The results wont meet the timing because we are using min and max lib files and openroad doesnot support multi corner optimisation. Therefore we do it using only typical corner lib
+
+![image](https://github.com/yagnavivek/PES_OpenLane_PD/assets/93475824/e3687d97-556d-4b81-8261-0c78aba74d13)
+
+![image](https://github.com/yagnavivek/PES_OpenLane_PD/assets/93475824/843fce06-f1d1-4469-92d4-b9b1b4a82b91)
+
+![image](https://github.com/yagnavivek/PES_OpenLane_PD/assets/93475824/928a49af-78b3-4e0e-a8b2-5c2bf7589f20)
+
+We have to ensure that the skew is withing 10% of clock period ie., should be less than 1.6 in my case
+```
+report_clock_skew -hold
+report clock_skew -setup
+```
+
+![image](https://github.com/yagnavivek/PES_OpenLane_PD/assets/93475824/dbd809aa-dcda-43a1-97da-9f0ab81fbf08)
+
 </details>
 
 <details>
